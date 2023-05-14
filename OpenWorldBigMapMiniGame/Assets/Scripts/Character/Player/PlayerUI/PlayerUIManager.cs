@@ -37,5 +37,7 @@ public class PlayerUIManager : MonoBehaviour
             NetworkManager.Singleton.Shutdown();
             NetworkManager.Singleton.StartClient();
         }
+
+
     }
 }

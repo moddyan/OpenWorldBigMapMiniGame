@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class CharacterLocomotionManager : MonoBehaviour
 {
-    public void HandleAllMovement()
-    {
-        // GROUNDED MOVEMENT
-        
-        // AERIAL MOVEMENT
-        
-        
+    protected virtual void Awake() {
+
     }
+
+
+
 }
