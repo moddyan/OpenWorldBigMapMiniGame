@@ -69,7 +69,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void HandleRotations()
     {
-        // IF LOCKED ON£¬FORCE ROTATION TOWARDS TARGET
+        // IF LOCKED ONï¼ŒFORCE ROTATION TOWARDS TARGET
         // ELSE ROTATE REGULARLY
 
         //ROTATE LEFT AND RIGHT BASED ON CAMERA HORIZONTAL MOVEMENT

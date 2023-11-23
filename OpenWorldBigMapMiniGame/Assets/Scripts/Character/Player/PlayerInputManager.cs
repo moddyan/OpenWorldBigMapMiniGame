@@ -10,7 +10,8 @@ using UnityEngine.UIElements.Experimental;
 public class PlayerInputManager : MonoBehaviour
 {
     public static PlayerInputManager Instance;
-
+    public PlayerManager player;
+    
     private PlayerControls playerControls;
 
     [Header("Player Movement Input")]
@@ -102,7 +103,7 @@ public class PlayerInputManager : MonoBehaviour
         // RETURNS THE ABSOLUTE NUMBER. (Meaning number without the negative sign, so its always positive)
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
 
-        // CLAMP THE VALUES£¬SO THEY ARE O£¬0.5 0R 1
+        // CLAMP THE VALUESï¼ŒSO THEY ARE Oï¼Œ0.5 0R 1
         if (moveAmount <= 0.5 && moveAmount > 0)
         {
             moveAmount = .5f;
@@ -111,6 +112,21 @@ public class PlayerInputManager : MonoBehaviour
         {
             moveAmount = 1;
         }
+        
+        // why do we pass 0 on the horizontal? because we only want non-strafing movement
+        // we use the horizontal when we are strafing or locked on
+        
+        // return if player is null
+        if (player == null)
+        {
+            return;
+        }
+        
+        
+        // if we are not locked onï¼Œ only use the move amount
+        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+        
+        // if we are locked onï¼Œ use the horizontal as well
     }
 
     private void HandleCameraMovementInput()
