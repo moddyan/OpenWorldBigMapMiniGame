@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,17 +15,24 @@ public class PlayerInputManager : MonoBehaviour
     
     private PlayerControls playerControls;
 
+    [Header("Camera Movement Input")]
+    [SerializeField] Vector2 cameraInput;
+    public float cameraHorizontalInput;
+    public float cameraVerticalInput;
+    
     [Header("Player Movement Input")]
     [SerializeField] Vector2 movementInput;
     public float horizontalInput;
     public float verticalInput;
     public float moveAmount;
+    
+    [Header("Player Action Input")]
+    [SerializeField] bool dodgeInput = false;
+ 
 
-    [Header("Camera Movement Input")]
-    [SerializeField] Vector2 cameraInput;
-    public float cameraHorizontalInput;
-    public float cameraVerticalInput;
+    
 
+    
     private void Awake()
     {
         if (Instance == null)
@@ -64,6 +72,7 @@ public class PlayerInputManager : MonoBehaviour
 
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
             playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
+            playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
         }
         playerControls.Enable();
     }
@@ -91,8 +100,14 @@ public class PlayerInputManager : MonoBehaviour
 
     private void Update()
     {
+       HandleAllInputs();
+    }
+
+    private void HandleAllInputs()
+    {
         HandlePlayerMovementInput();
         HandleCameraMovementInput();
+        HandleDodgeInput();
     }
 
     private void HandlePlayerMovementInput()
@@ -133,6 +148,18 @@ public class PlayerInputManager : MonoBehaviour
     {
         cameraHorizontalInput = cameraInput.x;
         cameraVerticalInput = cameraInput.y;
+    }
+
+    private void HandleDodgeInput()
+    {
+        if (dodgeInput)
+        {
+            dodgeInput = false;
+            // TODO, return if menu or UI is open
+            // perform a dodge
+            player.playerLocomotionManager.AttemptToPerformDodge();
+            
+        }
     }
 
 }
