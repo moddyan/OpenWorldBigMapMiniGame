@@ -6,7 +6,6 @@ using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements.Experimental;
 
 public class PlayerInputManager : MonoBehaviour
 {
@@ -28,6 +27,7 @@ public class PlayerInputManager : MonoBehaviour
     
     [Header("Player Action Input")]
     [SerializeField] bool dodgeInput = false;
+    [SerializeField] bool sprintInput = false;
  
 
     
@@ -73,6 +73,10 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
             playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
             playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+            
+            playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
+            playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
+
         }
         playerControls.Enable();
     }
@@ -108,6 +112,7 @@ public class PlayerInputManager : MonoBehaviour
         HandlePlayerMovementInput();
         HandleCameraMovementInput();
         HandleDodgeInput();
+        HandleSprinting();
     }
 
     private void HandlePlayerMovementInput()
@@ -139,7 +144,8 @@ public class PlayerInputManager : MonoBehaviour
         
         
         // if we are not locked on， only use the move amount
-        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount,
+            player.playerNetworkManager.isSprinting.Value);
         
         // if we are locked on， use the horizontal as well
     }
@@ -159,6 +165,20 @@ public class PlayerInputManager : MonoBehaviour
             // perform a dodge
             player.playerLocomotionManager.AttemptToPerformDodge();
             
+        }
+    }
+    
+    private void HandleSprinting()
+    {
+        if (sprintInput)
+        {
+            // TODO, return if menu or UI is open
+            // handle sprinting
+            player.playerLocomotionManager.HandleSprinting();
+        }
+        else
+        {
+            player.playerNetworkManager.isSprinting.Value = false;  // bad code
         }
     }
 

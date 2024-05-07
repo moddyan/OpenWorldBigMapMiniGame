@@ -74,6 +74,54 @@
             ]
         },
         {
+            "name": "Player Actions",
+            "id": "6b36a9c8-50de-48a8-a292-a85b8a71c9ab",
+            "actions": [
+                {
+                    "name": "Dodge",
+                    "type": "Button",
+                    "id": "8f49ae7d-ea72-409e-a0ae-ab8bf4c04548",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "PassThrough",
+                    "id": "bc5be253-fd33-43e6-8769-d7cef3038ec3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "456ed4b1-e23b-4d1a-a1e7-5679fbff7e1c",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "46cdb48a-2418-40cd-97a2-805e8b331fd9",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "Player Camera",
             "id": "b0a4bf32-c201-4311-8eb1-9e1cd642f70a",
             "actions": [
@@ -142,34 +190,6 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "Player Actions",
-            "id": "6b36a9c8-50de-48a8-a292-a85b8a71c9ab",
-            "actions": [
-                {
-                    "name": "Dodge",
-                    "type": "Button",
-                    "id": "8f49ae7d-ea72-409e-a0ae-ab8bf4c04548",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "456ed4b1-e23b-4d1a-a1e7-5679fbff7e1c",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dodge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }

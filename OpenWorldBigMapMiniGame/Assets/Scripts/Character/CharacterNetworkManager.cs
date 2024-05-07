@@ -13,7 +13,7 @@ public class CharacterNetworkManager : NetworkBehaviour
 
     public NetworkVariable<Quaternion> networkRotation = new(Quaternion.identity, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    public Vector3 networkPositonVelocity;
+    public Vector3 networkPositionVelocity;
     public float networkPositionSmoothTime = 0.1f;
     public float networkRotationSmoothTime = 0.1f;
 
@@ -22,6 +22,9 @@ public class CharacterNetworkManager : NetworkBehaviour
     public NetworkVariable<float> verticalMovement = new(0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<float> moveAmount = new(0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+    [Header("Flags")]
+    public NetworkVariable<bool> isSprinting = new(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();
