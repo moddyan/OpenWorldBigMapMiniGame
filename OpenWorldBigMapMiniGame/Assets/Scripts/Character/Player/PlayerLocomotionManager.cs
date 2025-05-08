@@ -19,9 +19,11 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [SerializeField] float runningSpeed = 5;
     [SerializeField] float sprintingSpeed = 6.5f;
     [SerializeField] float rotationSpeed = 15;
+    [SerializeField] float sprintStaminaCost = 2;
 
     [Header("Dodge")]
     private Vector3 rollDirection;
+    [SerializeField] float dodgeStaminaCost = 25;
     
     protected override void Awake()
     {
@@ -137,7 +139,12 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             return;
         }
         
-        // TODO if out of stamina, stop sprinting
+        // if out of stamina, stop sprinting
+        if (player.playerNetworkManager.currentStamina.Value <= 0)
+        {
+            player.playerNetworkManager.isSprinting.Value = false;
+            return;
+        }
 
         if (moveAmount >= 0.5f)
         {
@@ -147,6 +154,12 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         {
             player.playerNetworkManager.isSprinting.Value = false;
         }
+
+        // if sprinting, consume stamina
+        if (player.playerNetworkManager.isSprinting.Value)
+        {
+            player.playerNetworkManager.currentStamina.Value -= sprintStaminaCost * Time.deltaTime;
+        }
    
         
     }
@@ -154,6 +167,10 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     public void AttemptToPerformDodge()
     {
         if (player.isPerformingAction)
+        {
+            return;
+        }
+        if (player.playerNetworkManager.currentStamina.Value <= 0)
         {
             return;
         }
@@ -176,6 +193,10 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             // perform a backstep if we are standing still
             player.playerAnimatorManager.PlayTargetActionAnimation("Back_Step_01", true, true);
         }
+
+        // if dodging, consume stamina
+        player.playerNetworkManager.currentStamina.Value -= dodgeStaminaCost;
+        
     }
 
 }

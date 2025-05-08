@@ -24,7 +24,12 @@ public class CharacterNetworkManager : NetworkBehaviour
 
     [Header("Flags")]
     public NetworkVariable<bool> isSprinting = new(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    
+
+    [Header("Stats")]
+    public NetworkVariable<int> endurance = new(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<float> currentStamina = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<float> maxStamina = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();

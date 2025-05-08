@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -2281780588219058240}
   - component: {fileID: 7260568335685271702}
   - component: {fileID: 818358516738242278}
+  - component: {fileID: -4731349216963872380}
   - component: {fileID: 6158466947946002682}
   - component: {fileID: 5363137773986957031}
   - component: {fileID: 5626184078699194743}
@@ -102,6 +103,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 1769593769
   InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -109,6 +112,8 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &-2281780588219058240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a9cd572b82c4c4eb9e4910ecf93c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   characterController: {fileID: 0}
   animator: {fileID: 0}
   characterNetworkManager: {fileID: 0}
@@ -130,6 +136,7 @@ MonoBehaviour:
   canMove: 1
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
+  playerNetworkManager: {fileID: 0}
 --- !u!114 &7260568335685271702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +154,7 @@ MonoBehaviour:
   moveAmount: 0
   walkingSpeed: 1.5
   runningSpeed: 3.5
+  sprintingSpeed: 6.5
   rotationSpeed: 15
 --- !u!114 &818358516738242278
 MonoBehaviour:
@@ -160,11 +168,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfd87c00bc4f3646a941f0203894622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   networkPosition:
     m_InternalValue: {x: 0, y: 0, z: 0}
   networkRotation:
     m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
-  networkPositonVelocity: {x: 0, y: 0, z: 0}
+  networkPositionVelocity: {x: 0, y: 0, z: 0}
   networkPositionSmoothTime: 0.1
   networkRotationSmoothTime: 0.1
   horizontalMovement:
@@ -173,6 +182,20 @@ MonoBehaviour:
     m_InternalValue: 0
   moveAmount:
     m_InternalValue: 0
+  isSprinting:
+    m_InternalValue: 0
+--- !u!114 &-4731349216963872380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4015527488677050875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef9a88853da13e34a8ca01279c337968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6158466947946002682
 MonoBehaviour:
   m_ObjectHideFlags: 0
