@@ -60,4 +60,18 @@ public class PlayerManager : CharacterManager
 
         }
     }
+
+    // public void SaveGameData(ref CharacterSaveData characterData)
+    // {
+    //     characterData.characterName = playerNetworkManager.characterName.Value.ToString();
+    //     characterData.xPosition = transform.position.x;
+    //     characterData.yPosition = transform.position.y;
+    //     characterData.zPosition = transform.position.z;
+    // }
+
+    // public void LoadGameData(ref CharacterSaveData characterData)
+    // {
+    //     playerNetworkManager.characterName.Value = characterData.characterName;
+    //     transform.position = new Vector3(characterData.xPosition, characterData.yPosition, characterData.zPosition);
+    // }
 }
