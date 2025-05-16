@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -85,9 +86,10 @@ public class WorldSaveGameManager : MonoBehaviour
     //     saveFileDataWriter.CreateNewSaveFile(currentCharacterData);
     // }
 
-    public IEnumerator LoadWorldScene()
+    public async void LoadWorldScene()
     {
         var loadOperator = SceneManager.LoadSceneAsync(worldSceneIndex);
-        yield return null;
+        await loadOperator;
+        NetworkManager.Singleton.StartHost();
     }
 }

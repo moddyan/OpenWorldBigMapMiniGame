@@ -20,11 +20,12 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [SerializeField] float sprintingSpeed = 6.5f;
     [SerializeField] float rotationSpeed = 15;
     [SerializeField] float sprintStaminaCost = 2;
-
-    [Header("Dodge")]
-    private Vector3 rollDirection;
     [SerializeField] float dodgeStaminaCost = 25;
-    
+    [SerializeField] float jumpStaminaCost = 25;
+
+    private Vector3 rollDirection;
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -197,6 +198,41 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         // if dodging, consume stamina
         player.playerNetworkManager.currentStamina.Value -= dodgeStaminaCost;
         
+    }
+
+    public void AttemptToPerformJump()
+    {
+        if (player.isPerformingAction)
+        {
+            return;
+        }
+        if (player.playerNetworkManager.currentStamina.Value <= 0)
+        {
+            return;
+        }
+
+        if (player.isJumping)
+        {
+            return;
+        }
+        if (!player.isGrounded)
+        {
+            return;
+        }
+
+        // todo if two handed, play two handed jump animation
+
+        player.playerAnimatorManager.PlayTargetActionAnimation("main_jump_01", false);
+        player.isJumping = true;
+
+        // if jumping, consume stamina
+        player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
+        
+    }
+
+    public void ApplyJumpingVelocity()
+    {
+        // player.characterController.Move(Vector3.up * jumpForce * Time.deltaTime);
     }
 
 }
