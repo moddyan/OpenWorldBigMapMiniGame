@@ -81,8 +81,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             return;
         }
         GetMovementValues();
-        moveDirection = PlayerCamera.Instance.transform.forward * verticalMovement;
-        moveDirection += PlayerCamera.Instance.transform.right * horizontalMovement;
+        moveDirection = MyPlayerCamera.Instance.transform.forward * verticalMovement;
+        moveDirection += MyPlayerCamera.Instance.transform.right * horizontalMovement;
         moveDirection.Normalize();
         moveDirection.y = 0;
 
@@ -117,8 +117,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
             return;
         }
         targetRotationDirection = Vector3.zero;
-        targetRotationDirection = PlayerCamera.Instance.cameraObject.transform.forward * verticalMovement;
-        targetRotationDirection += PlayerCamera.Instance.cameraObject.transform.right * horizontalMovement;
+        targetRotationDirection = MyPlayerCamera.Instance.cameraObject.transform.forward * verticalMovement;
+        targetRotationDirection += MyPlayerCamera.Instance.cameraObject.transform.right * horizontalMovement;
         targetRotationDirection.Normalize();
         targetRotationDirection.y = 0;
 
@@ -179,8 +179,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         if (moveAmount > 0)
         {
             // perform a roll if we are moving
-            rollDirection = PlayerCamera.Instance.cameraObject.transform.forward * verticalMovement;
-            rollDirection += PlayerCamera.Instance.cameraObject.transform.right * horizontalMovement;
+            rollDirection = MyPlayerCamera.Instance.cameraObject.transform.forward * verticalMovement;
+            rollDirection += MyPlayerCamera.Instance.cameraObject.transform.right * horizontalMovement;
             rollDirection.y = 0;
             rollDirection.Normalize();
         

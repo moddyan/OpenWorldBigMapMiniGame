@@ -37,7 +37,7 @@ public class PlayerManager : CharacterManager
 
         base.LateUpdate();
 
-        PlayerCamera.Instance.HandleAllCameraActions();
+        MyPlayerCamera.Instance.HandleAllCameraActions();
     }
 
     public override void OnNetworkSpawn()
@@ -47,7 +47,7 @@ public class PlayerManager : CharacterManager
         // The player object by this client
         if (IsOwner)
         {
-            PlayerCamera.Instance.player = this;
+            MyPlayerCamera.Instance.player = this;
             PlayerInputManager.Instance.player = this;
             
             playerNetworkManager.currentStamina.OnValueChanged += PlayerUIManager.Instance.playerUIHudManager.SetNewStaminaValue;
